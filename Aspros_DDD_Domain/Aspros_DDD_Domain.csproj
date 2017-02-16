@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aspros_DDD_Domain_ValueObject\Aspros_DDD_Domain_ValueObject.csproj" />
+    <ProjectReference Include="..\Aspros_DDD_Infrastructure\Aspros_DDD_Infrastructure.csproj" />
+    <ProjectReference Include="..\Framework.Domain.Core\Framework.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>
