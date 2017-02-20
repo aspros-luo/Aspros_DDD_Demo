@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace UserTests
 {
     public class UnitTest1 : BaseTest
-    {
+    { 
         private readonly IUserRepository _userRepository;
         public UnitTest1(ITestOutputHelper output) : base(output)
         {

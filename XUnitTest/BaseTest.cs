@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 namespace XUnitTest
 {
     public class BaseTest
-    {
+    { 
         protected readonly ITestOutputHelper Output;
         protected IServiceProvider Provider;
 
