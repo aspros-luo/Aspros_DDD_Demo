@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aspros_DDD_Infrastructure
 {
+    
     public static class ModelBuilderExtenions
     {
         public static IEnumerable<Type> GetMappingTypes(this Assembly assembly, Type mappingInterface)
@@ -22,7 +23,10 @@ namespace Aspros_DDD_Infrastructure
                                         i.GetTypeInfo().IsGenericType &&
                                         i.GetGenericTypeDefinition() == mappingInterface));
         }
-
+        
+        /// <summary>
+        /// AddEntityConfigurationsFromAssembly 是对 ModelBuilder 的扩展，用于多个实体映射配置，OnModelCreating 中只需一行代码
+        /// </summary>
         public static void AddEntityConfigurationsFromAssembly(this ModelBuilder modelBuilder, Assembly assembly)
         {
             var mappingTypes = assembly.GetMappingTypes(typeof(IEntityMappingConfiguration<>));
