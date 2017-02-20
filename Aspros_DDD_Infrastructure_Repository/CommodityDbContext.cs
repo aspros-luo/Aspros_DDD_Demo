@@ -6,7 +6,7 @@ namespace Aspros_DDD_Infrastructure
 {
     public class CommodityDbContext : DbContext, IDbContext
     {
-        public CommodityDbContext(DbContextOptions<CommodityDbContext> options) : base(options)
+        public CommodityDbContext(DbContextOptions options) : base(options)
         {
 
         }

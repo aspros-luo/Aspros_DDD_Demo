@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.0-alpha" />
   </ItemGroup>
 
   <ItemGroup>

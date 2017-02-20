@@ -18,7 +18,7 @@ namespace Framework.Infrastructure.Repository.Core
 
         public IQueryable<TAggregateRoot> Get(long id)
         {
-            throw new NotImplementedException();
+            return _entities.Where(u => u.Id == id);
         }
 
         public IQueryable<TAggregateRoot> GetAll()
@@ -26,5 +26,5 @@ namespace Framework.Infrastructure.Repository.Core
             return _entities;
         }
     }
-    
+
 }
