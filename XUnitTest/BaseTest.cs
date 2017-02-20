@@ -13,7 +13,7 @@ namespace XUnitTest
 
         public BaseTest(ITestOutputHelper output)
         {
-            const string connectionString = @"server=10.9.25.67;database=aqhg_b2b;user id=root;password=EGm9PFzLbb!DSya.KH;persistsecurityinfo=True;AutoEnlist=false;";
+            const string connectionString = @"server=.;database=tets;user id=root;password=123;persistsecurityinfo=True;AutoEnlist=false;";
             var service = new ServiceCollection();
             Output = output;
             service.Configure(connectionString);
