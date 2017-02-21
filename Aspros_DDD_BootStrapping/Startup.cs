@@ -7,6 +7,8 @@ using MySQL.Data.EntityFrameworkCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Aspros_DDD_Domain_Repository_Interfaces.IdentityRepositoryInterfaces;
 using Aspros_DDD_Repository.IdentityRepository;
+using Aspros_DDD_Application_Interfaces.IdentityServiceInterfaces;
+using Aspros_DDD_Application.IdentityServices;
 
 namespace Aspros_DDD_BootStrapping
 {
@@ -24,6 +26,7 @@ namespace Aspros_DDD_BootStrapping
 
             service.AddTransient<IUserRepository, UserRepository>();
             service.AddTransient<IIdentityRepository, IdentityRepository>();
+            service.AddTransient<IIdentityService, IdentityService>();
         }
     }
 }

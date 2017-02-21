@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aspros_DDD_Application_Interfaces\Aspros_DDD_Application_Interfaces.csproj" />
     <ProjectReference Include="..\Aspros_DDD_Domain\Aspros_DDD_Domain.csproj" />
     <ProjectReference Include="..\Aspros_DDD_Domain_Repository_Interfaces\Aspros_DDD_Domain_Repository_Interfaces.csproj" />
     <ProjectReference Include="..\XUnitTest\XUnitTest.csproj" />

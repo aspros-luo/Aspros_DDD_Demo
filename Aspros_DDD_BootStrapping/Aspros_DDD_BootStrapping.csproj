@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aspros_DDD_Application\Aspros_DDD_Application.csproj" />
+    <ProjectReference Include="..\Aspros_DDD_Application_Interfaces\Aspros_DDD_Application_Interfaces.csproj" />
     <ProjectReference Include="..\Aspros_DDD_Domain_Repository_Interfaces\Aspros_DDD_Domain_Repository_Interfaces.csproj" />
     <ProjectReference Include="..\Aspros_DDD_Infrastructure_Repository\Aspros_DDD_Infrastructure_Repository.csproj" />
     <ProjectReference Include="..\Aspros_DDD_Repository\Aspros_DDD_Repository.csproj" />

@@ -14,7 +14,7 @@ namespace Aspros_DDD_Infrastructure_Repository.MapConfigurations.IdentityMapping
         {
             entityTypeBuilder.ToTable("Identities");
             entityTypeBuilder.HasKey(i => i.Id);
-            entityTypeBuilder.Property(i => i.Id);
+            entityTypeBuilder.Property(i => i.Id).ValueGeneratedOnAdd();
             entityTypeBuilder.Property(i => i.Name);
         }
     }
