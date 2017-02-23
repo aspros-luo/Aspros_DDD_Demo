@@ -20,9 +20,11 @@ namespace Aspros_DDD_Infrastructure.Utility.Filter
         {
             var controllerName = context.RouteData.Values["Controller"].ToString().ToLower();
             var actionName = context.RouteData.Values["Action"].ToString().ToLower();
-            var areaName = context.RouteData.Values["Area"].ToString().ToLower();
+            var areaName = context.RouteData.Values["Area"] != null ? context.RouteData.Values["Area"].ToString().ToLower() : "";
 
-            var id = context.RouteData.Values.ContainsKey(Key) ? context.RouteData.Values[Key].ToString() : "";
+
+            //var id = context.RouteData.Values.ContainsKey(Key) ? context.RouteData.Values[Key].ToString() : "";
+            var id = Key != null ? context.RouteData.Values[Key].ToString() : "";
             if (string.IsNullOrEmpty(id) && context.HttpContext.Request.Query.ContainsKey(Key))
             {
                 id = context.HttpContext.Request.Query[Key];
@@ -32,14 +34,18 @@ namespace Aspros_DDD_Infrastructure.Utility.Filter
 
             if (File.Exists(filePath))
             {
-                var fs = File.Open(filePath, FileMode.Open);
-                var sr = new StreamReader(fs, Encoding.UTF8);
-                var contentResult = new ContentResult()
+                using (var fs = File.Open(filePath, FileMode.Open))
                 {
-                    Content = sr.ReadToEnd(),
-                    ContentType = "text/html",
-                };
-                context.Result = contentResult;
+                    using (var sr = new StreamReader(fs, Encoding.UTF8))
+                    {
+                        var contentResult = new ContentResult()
+                        {
+                            Content = sr.ReadToEnd(),
+                            ContentType = "text/html",
+                        };
+                        context.Result = contentResult;
+                    }
+                }
             }
         }
         //Action执行后
@@ -65,10 +71,11 @@ namespace Aspros_DDD_Infrastructure.Utility.Filter
                 view.RenderAsync(viewContext).GetAwaiter().GetResult();
                 sw.Flush();
 
-                string areaName = context.RouteData.Values["Area"].ToString().ToLower();
+                string areaName = context.RouteData.Values["Area"] != null ? context.RouteData.Values["Area"].ToString().ToLower() : "";
                 string controllerName = context.RouteData.Values["Controller"].ToString().ToLower();
                 string actionName = context.RouteData.Values["Action"].ToString().ToLower();
-                string id = context.RouteData.Values.ContainsKey(Key) ? context.RouteData.Values[Key].ToString().ToLower() : "";
+                //string id = context.RouteData.Values.ContainsKey(Key) ? context.RouteData.Values[Key].ToString().ToLower() : "";
+                string id = Key != null ? context.RouteData.Values[Key].ToString().ToLower() : "";
                 if (string.IsNullOrEmpty(id) && context.HttpContext.Request.Query.ContainsKey(Key))
                 {
                     id = context.HttpContext.Request.Query[Key];
@@ -77,30 +84,36 @@ namespace Aspros_DDD_Infrastructure.Utility.Filter
                 //获取文件目录
                 var devicedir = Path.Combine(AppContext.BaseDirectory, "wwwroot", areaName);
                 //判断目录是否存在
-                if (!Directory.Exists(devicedir)) { Directory.CreateDirectory(devicedir); }
+                if (!Directory.Exists(devicedir))
+                {
+                    Directory.CreateDirectory(devicedir);
+                }
 
                 //获取文件路径
                 var filePath = Path.Combine(AppContext.BaseDirectory, "wwwroot", areaName, controllerName + "-" + actionName + ((string.IsNullOrEmpty(id) ? "" : "-" + id)) + ".html");
 
-                //获取文件信息
-                var fileInfo = new FileInfo(filePath);
-                //计算时间间隔
-                var ts = DateTime.Now - fileInfo.CreationTime;
-                if (ts.TotalMinutes <= 2)
-                {
+                ////获取文件信息
+                //var fileInfo = new FileInfo(filePath);
+                ////计算时间间隔
+                //var ts = DateTime.Now - fileInfo.CreationTime;
+                //if (ts.TotalMinutes <= 2)
+                //{
                     //写入内容
-                    var fs = File.Open(filePath, FileMode.Create);
-                    var streamWriter = new StreamWriter(fs, Encoding.UTF8);
-                    streamWriter.Write(sb);
-
-                    var contentResult = new ContentResult()
+                    using (var fs = File.Open(filePath, FileMode.Create))
                     {
-                        Content = sb.ToString(),
-                        ContentType = "text/html"
-                    };
-                    context.Result = contentResult;
-                }
-
+                        using (var streamWriter = new StreamWriter(fs, Encoding.UTF8))
+                        {
+                            streamWriter.Write(sb);
+                            var contentResult = new ContentResult()
+                            {
+                                Content = sb.ToString(),
+                                ContentType = "text/html"
+                            };
+                            context.Result = contentResult;
+                        }
+                    }
+                    
+                //}
             }
         }
 

@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aspros_DDD_BootStrapping\Aspros_DDD_BootStrapping.csproj" />
+    <ProjectReference Include="..\Aspros_DDD_Infrastructure\Aspros_DDD_Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
