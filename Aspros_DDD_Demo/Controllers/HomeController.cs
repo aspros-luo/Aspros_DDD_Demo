@@ -9,6 +9,7 @@ namespace Aspros_DDD_Demo.Controllers
         public IActionResult Index()
         {
             return View();
+
         }
 
         public IActionResult About()

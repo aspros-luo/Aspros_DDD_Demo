@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using Aspros_DDD_BootStrapping;
 namespace Aspros_DDD_Demo
 {
     public class Startup
@@ -23,6 +23,7 @@ namespace Aspros_DDD_Demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure(Configuration["data:ConnectionString"]);//添加书库连接
             // Add framework services.
             services.AddMvc();
         }
