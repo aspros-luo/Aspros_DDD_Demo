@@ -4,6 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Aspros_DDD_BootStrapping;
+using System;
+using Microsoft.Extensions.Options;
+using Aspros_DDD_Infrastructure.Caching;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 namespace Aspros_DDD_Demo
 {
     public class Startup
@@ -31,6 +36,7 @@ namespace Aspros_DDD_Demo
                 options.Configuration = "localhost:6379,abortConnect=false";
                 options.InstanceName = "master";
             });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -63,5 +69,6 @@ namespace Aspros_DDD_Demo
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

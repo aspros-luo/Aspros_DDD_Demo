@@ -18,7 +18,8 @@ namespace Aspros_DDD_Infrastructure.Caching
 
         public override void RegisterOptions(IServiceCollection services, IConfigurationRoot root)
         {
-            //services.Configure<CachingConfigInfo>(root.GetSection(SectionName));
+            var a = root.GetSection(SectionName);
+            services.Configure<CachingConfigInfo>(root.GetSection(SectionName));
         }
     }
 }
