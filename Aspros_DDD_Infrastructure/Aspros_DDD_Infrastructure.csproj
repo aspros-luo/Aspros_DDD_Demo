@@ -5,23 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Caching\BaseCacheHandler.cs" />
-    <Compile Remove="Caching\CacheServer.cs" />
-    <Compile Remove="Caching\CachingConfigInfo.cs" />
-    <Compile Remove="Caching\ICacheHander.cs" />
-    <Compile Remove="Caching\RedisCacheHandler.cs" />
-    <Compile Remove="Config\ConfigInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Caching\" />
-    <Folder Include="Config\" />
   </ItemGroup>
 
 </Project>

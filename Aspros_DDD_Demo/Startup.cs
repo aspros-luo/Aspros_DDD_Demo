@@ -31,6 +31,7 @@ namespace Aspros_DDD_Demo
             services.Configure(Configuration["data:ConnectionString"]);//添加数据库连接
 
             services.AddMemoryCache();
+
             services.AddDistributedRedisCache(options =>
             {
                 options.Configuration = "localhost:6379,abortConnect=false";
