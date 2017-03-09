@@ -23,7 +23,14 @@ namespace Aspros_DDD_Demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure(Configuration["data:ConnectionString"]);//添加书库连接
+            services.Configure(Configuration["data:ConnectionString"]);//添加数据库连接
+
+            services.AddMemoryCache();
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379,abortConnect=false";
+                options.InstanceName = "master";
+            });
             // Add framework services.
             services.AddMvc();
         }
