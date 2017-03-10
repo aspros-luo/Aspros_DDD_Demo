@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Aspros_DDD_Infrastructure.Caching
@@ -159,12 +158,26 @@ namespace Aspros_DDD_Infrastructure.Caching
 
         public bool Replace(string key, string value, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(value))
+            {
+                if (Exists(key))
+                    if (!Remove(key)) return false;
+
+                return Add(key, value,expiresSliding,expiresAbsoulte);
+            }
+            return false;
         }
 
         public bool Replace(string key, string value, TimeSpan expiresIn, bool isSliding = false)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(value))
+            {
+                if (Exists(key))
+                    if (!Remove(key)) return false;
+
+                return Add(key, value, expiresIn, isSliding);
+            }
+            return false;
         }
 
         public Task<bool> ReplaceAsync(string key, string value)
