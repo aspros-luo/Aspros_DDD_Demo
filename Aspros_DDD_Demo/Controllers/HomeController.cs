@@ -2,29 +2,38 @@
 using Aspros_DDD_Infrastructure.Utility.Filter;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
+using Aspros_DDD_Infrastructure.Caching;
 
 namespace Aspros_DDD_Demo.Controllers
 {
     //[StaticFileHandlerFilter]
     public class HomeController : Controller
     {
-        private IDistributedCache _memoryCache;
+        //private IDistributedCache _memoryCache;
 
-        public HomeController(IDistributedCache memoryCache)
-        {
-            _memoryCache = memoryCache;
-        }
+        private readonly RedisCacheService _cache;
+
+      
         public IActionResult Index()
         {
+            //var cacheKey = "key";
+            //string result;
+            //if(string.IsNullOrWhiteSpace(_memoryCache.GetString(cacheKey)))
+            //{
+            //    result = DateTime.Now.ToString();
+            //    _memoryCache.SetString(cacheKey, result);
+            //}
             var cacheKey = "key";
-            string result;
-            if(string.IsNullOrWhiteSpace(_memoryCache.GetString(cacheKey)))
+            if(_cache.Exists(cacheKey))
             {
-                result = DateTime.Now.ToString();
-                _memoryCache.SetString(cacheKey, result);
+                var cacheValue = _cache.Get<string>(cacheKey);
+                return Content(cacheValue);
             }
-            return View();
-
+            else
+            {
+                _cache.Add(cacheKey, DateTime.Now.ToString());
+                return View();
+            }
         }
 
         public IActionResult About()

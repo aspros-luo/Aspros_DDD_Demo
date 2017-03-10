@@ -8,6 +8,8 @@ using System;
 using Microsoft.Extensions.Options;
 using Aspros_DDD_Infrastructure.Caching;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Aspros_DDD_Demo
 {
@@ -30,13 +32,25 @@ namespace Aspros_DDD_Demo
         {
             services.Configure(Configuration["data:ConnectionString"]);//添加数据库连接
 
-            services.AddMemoryCache();
+            //services.AddMemoryCache();
 
-            services.AddDistributedRedisCache(options =>
+            if(Convert.ToBoolean( Configuration["cache:UseRedis"]))
             {
-                options.Configuration = "localhost:6379,abortConnect=false";
-                options.InstanceName = "master";
-            });
+                services.AddSingleton(typeof(ICacheService), new RedisCacheService(new RedisCacheOptions
+                {
+                    Configuration=Configuration["cache:Redis_ConnectionString"],
+                    InstanceName=Configuration["cache:Redis_Instance"]
+                },0));
+            }
+            else
+            {
+                services.AddSingleton<IMemoryCache>(factory =>
+                {
+                    var cache = new MemoryCache(new MemoryCacheOptions());
+                    return cache;
+                });
+                services.AddSingleton<ICacheService, MemoryCacheService>();
+            }
 
             // Add framework services.
             services.AddMvc();
