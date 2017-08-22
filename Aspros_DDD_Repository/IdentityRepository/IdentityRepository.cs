@@ -16,9 +16,9 @@ namespace Aspros_DDD_Repository.IdentityRepository
 
         }
 
-        public Identity GetIdentityById(long id)
+        public IQueryable<Identity> GetIdentityById(long id)
         {
-            return _entities.SingleOrDefault(i => i.Id == id);
+            return Entities.Where(i => i.Id == id);
         }
     }
 }

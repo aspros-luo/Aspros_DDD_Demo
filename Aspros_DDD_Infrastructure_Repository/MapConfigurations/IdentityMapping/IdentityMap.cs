@@ -1,10 +1,6 @@
 ﻿using Aspros_DDD_Domain.IdentityItem;
-using Aspros_DDD_Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aspros_DDD_Infrastructure_Repository.MapConfigurations.IdentityMapping
 {
@@ -12,7 +8,7 @@ namespace Aspros_DDD_Infrastructure_Repository.MapConfigurations.IdentityMapping
     {
         public override void Map(EntityTypeBuilder<Identity> entityTypeBuilder)
         {
-            entityTypeBuilder.ToTable("Identities");
+            entityTypeBuilder.ToTable("identities");
             entityTypeBuilder.HasKey(i => i.Id);
             entityTypeBuilder.Property(i => i.Id).ValueGeneratedOnAdd();
             entityTypeBuilder.Property(i => i.Name);

@@ -1,4 +1,4 @@
-﻿namespace Aspros_DDD_Domain_ValueObject.UserValueObjects
+﻿namespace Framework.Domain.ValueObjects
 {
     public enum UserType
     {

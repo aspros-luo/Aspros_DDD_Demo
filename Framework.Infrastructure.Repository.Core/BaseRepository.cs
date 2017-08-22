@@ -1,29 +1,21 @@
-﻿using System;
-using System.Linq;
-using Framework.Domain.Core;
+﻿using Framework.Domain.Core;
 using Framework.Infrastructure.Interfaces.Core;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace Framework.Infrastructure.Repository.Core
 {
     public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoot> where TAggregateRoot : class, IAggregateRoot
     {
-        public readonly IQueryable<TAggregateRoot> _entities;
-        public BaseRepository(IDbContext dbContext)
-        {
-            _entities = dbContext.Set<TAggregateRoot>();
-        }
+        public readonly IQueryable<TAggregateRoot> Entities;
 
-        public IQueryable<TAggregateRoot> Get(long id)
+        protected BaseRepository(IDbContext dbContext)
         {
-            return _entities.Where(u => u.Id == id);
+            Entities = dbContext.Set<TAggregateRoot>();
         }
 
         public IQueryable<TAggregateRoot> GetAll()
         {
-            return _entities;
+            return Entities;
         }
     }
 

@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
-using Microsoft.EntityFrameworkCore;
+using Aspros_DDD_Infrastructure;
 using Framework.Infrastructure.Interfaces.Core;
+using Microsoft.EntityFrameworkCore;
 
-namespace Aspros_DDD_Infrastructure
+namespace Aspros_DDD_Infrastructure_Repository
 {
     public class CommodityDbContext : DbContext, IDbContext
     {
